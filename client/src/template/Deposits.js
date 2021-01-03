@@ -3,6 +3,7 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Title from "./Title";
+import { useSelector } from "react-redux";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -16,18 +17,17 @@ const useStyles = makeStyles({
 
 export default function Deposits() {
   const classes = useStyles();
+  const messages = useSelector((state) => state.auth.messages);
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $3,024.00
+      <Title>Total Message</Title>
+      <Typography component="p" variant="h1">
+        {messages.length}
       </Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
-      </Typography>
+
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
+          View Detail
         </Link>
       </div>
     </React.Fragment>

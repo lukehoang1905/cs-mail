@@ -2,33 +2,44 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import Box from "@material-ui/core/Box";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+
+import {
+  Drawer,
+  Box,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Badge,
+  Container,
+  Grid,
+  Paper,
+  Link,
+} from "@material-ui/core";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+
+//This is icon button array for leftside bar
 import { mainListItems, secondaryListItems } from "./listItems";
+
 import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import authActions from "../redux/actions/auth.actions";
+
 //clean up on demo
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        CS-mail{" "}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -109,8 +120,13 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     display: "flex",
-    overflow: "auto",
+
     flexDirection: "column",
+  },
+  orders: {
+    maxHeight: "40vh",
+    overflow: "scroll",
+    overflowX: "hidden",
   },
   fixedHeight: {
     height: 240,
@@ -119,6 +135,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
+  const currentUser = useSelector((state) => state.auth.user);
+  const currentUserId = currentUser._id;
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -127,6 +146,10 @@ export default function Dashboard() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  useEffect(() => {
+    if (currentUserId) dispatch(authActions.getReceivedMessages(currentUserId));
+  }, [dispatch, currentUserId]);
 
   return (
     <div className={classes.root}>
@@ -155,7 +178,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            Dashboard
+            CoderSchool Mail
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -173,6 +196,7 @@ export default function Dashboard() {
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
+            Dashboard
             <ChevronLeftIcon />
           </IconButton>
         </div>
@@ -199,7 +223,7 @@ export default function Dashboard() {
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
+              <Paper className={classes.paper && classes.orders}>
                 <Orders />
               </Paper>
             </Grid>
