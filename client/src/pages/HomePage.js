@@ -139,7 +139,7 @@ const HomePage = () => {
             horizontal: "right",
           }}
         >
-          <ComposeEditor />
+          <ComposeEditor handleClose={handleClose} />
         </Popover>
       </div>
     </div>

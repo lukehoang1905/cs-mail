@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-const ComposeEditor = () => {
+const ComposeEditor = ({ handleClose }) => {
   const classes = useStyles();
-  const userId = useSelector((state) => state.auth.user._id);
+  const from = useSelector((state) => state.auth.user._id);
   const [message, setMessage] = useState({
     to: "",
     title: "",
@@ -38,13 +38,14 @@ const ComposeEditor = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const { to, title, body } = message;
-    // if (!message) {
-    //   return;
-    // }
-    console.log(userId);
-    dispatch(authActions.sendMessage({ userId, to, title, body }));
+    if (!message) {
+      alert("There is no content to send");
+      return;
+    }
+    console.log(from);
+    dispatch(authActions.sendMessage({ from, to, title, body }));
+    handleClose();
   };
   return (
     <>
