@@ -17,7 +17,11 @@ const StyledHeader = styled(Box)({
 });
 
 const useStyles = makeStyles((theme) => ({
-  root: { display: "flex", height: "60vh", flexDirection: "column" },
+  root: {
+    display: "flex",
+    height: "60vh",
+    flexDirection: "column",
+  },
   textField: { flex: 1, display: "inline" },
   button: {
     margin: theme.spacing(1),
@@ -32,7 +36,10 @@ const ComposeEditor = ({ handleClose }) => {
     body: "",
   });
   const dispatch = useDispatch();
-
+  const handleDelete = () => {
+    setMessage({ to: "", title: "", body: "" });
+    handleClose();
+  };
   const handleChange = (e) => {
     setMessage({ ...message, [e.target.name]: e.target.value });
   };
@@ -45,21 +52,22 @@ const ComposeEditor = ({ handleClose }) => {
     }
     console.log(from);
     dispatch(authActions.sendMessage({ from, to, title, body }));
-    handleClose();
+    handleDelete();
   };
+
   return (
     <>
       <Paper elevation={3} className={classes.root}>
         <StyledHeader>New Message</StyledHeader>
         <InputBase
           name="to"
-          placeholder="To : "
+          placeholder="To : r@gmail.com"
           required
           value={message.to}
           onChange={handleChange}
         />
         <InputBase
-          placeholder="title : "
+          placeholder="Title : "
           required
           name="title"
           onChange={handleChange}
@@ -70,7 +78,7 @@ const ComposeEditor = ({ handleClose }) => {
           multiline
           name="body"
           className={classes.textField}
-          placeholder="body : "
+          placeholder="Body : "
           value={message.body}
           onChange={handleChange}
           required
@@ -85,6 +93,15 @@ const ComposeEditor = ({ handleClose }) => {
             onClick={handleSubmit}
           >
             Send
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+            startIcon={<Icon>delete</Icon>}
+            onClick={handleDelete}
+          >
+            Delete
           </Button>
         </div>
       </Paper>

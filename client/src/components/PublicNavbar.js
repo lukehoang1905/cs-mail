@@ -11,7 +11,7 @@ import TouchAppIcon from "@material-ui/icons/TouchApp";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
-import TemporaryDrawer from "./Drawer";
+
 import { IconButton, Badge } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";

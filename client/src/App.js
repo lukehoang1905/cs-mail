@@ -7,6 +7,8 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import Dashboard from "./template/Dashboard";
+
 import AlertMsg from "./components/AlertMsg";
 import { useDispatch, useSelector } from "react-redux";
 import authActions from "./redux/actions/auth.actions";
@@ -32,6 +34,7 @@ function App() {
           <AlertMsg />
           <Switch>
             <PrivateRoute exact path="/" component={HomePage} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
             <Route component={NotFoundPage} />

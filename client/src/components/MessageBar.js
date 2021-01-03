@@ -3,7 +3,6 @@ import {
   ListItem,
   ListItemText,
   Checkbox,
-  ListItemSecondaryAction,
   Divider,
   makeStyles,
 } from "@material-ui/core";
@@ -67,7 +66,6 @@ export default function MessageBar({ message, currentUserId }) {
           onChange={() => handleToogleCheck("star")}
         />
         <ListItemText primary={` ${message.title}`} />
-
         <div className={classes.iconGroup}>
           <Archive />
           <Delete />

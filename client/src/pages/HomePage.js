@@ -7,10 +7,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import ButtonAppBar from "../components/PublicNavbar";
 
 import MessageBar from "../components/MessageBar";
-import { List, Popover, Typography } from "@material-ui/core";
+import { List, Popover } from "@material-ui/core";
 import GmailTabsStyle from "../components/GmailTabs";
 import TemporaryDrawer from "../components/Drawer";
-import PostAddIcon from "@material-ui/icons/PostAdd";
+
 import ComposeEditor from "../components/ComposeEditor";
 const useStyles = makeStyles((theme) => ({
   root: { maxHeigth: "100vh" },
