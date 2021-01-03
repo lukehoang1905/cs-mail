@@ -8,6 +8,9 @@ const messageSchema = Schema(
     title: { type: String, required: true },
     body: { type: String, required: true },
     status: { type: String, enum: ["seen", "unseen"] },
+    bookmark: { type: Boolean, required: true, default: false },
+    box: { type: Boolean, required: true, default: false },
+    star: { type: Boolean, required: true, default: false },
   },
   {
     timestamps: true,

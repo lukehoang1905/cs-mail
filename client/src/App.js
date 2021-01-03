@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PublicNavbar from "./components/PublicNavbar";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -29,7 +29,6 @@ function App() {
         <p>Loading...</p>
       ) : (
         <Router>
-          <PublicNavbar />
           <AlertMsg />
           <Switch>
             <PrivateRoute exact path="/" component={HomePage} />

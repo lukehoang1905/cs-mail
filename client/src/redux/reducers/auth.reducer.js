@@ -4,6 +4,7 @@ const initialState = {
   isAuthenticated: null,
   loading: false,
   messages: [],
+  success: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -62,6 +63,8 @@ const authReducer = (state = initialState, action) => {
     case types.UPDATE_MSG_REQUEST:
       return { ...state, loading: true };
     case types.UPDATE_MSG_SUCCESS:
+      console.log("in reducer");
+      console.log(state.user);
       return { ...state, loading: false };
     case types.UPDATE_MSG_FAILURE:
       return { ...state, loading: false };
