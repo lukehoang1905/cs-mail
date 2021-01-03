@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
 export default function SignUp() {
   const classes = useStyles();
   const [formData, setFormData] = useState({
@@ -67,6 +66,7 @@ export default function SignUp() {
     password: "",
     password2: "",
   });
+
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.auth.loading);
