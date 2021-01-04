@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -32,6 +32,7 @@ import Orders from "./Orders";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import authActions from "../redux/actions/auth.actions";
+import MainList from "./MainList";
 
 //clean up on demo
 function Copyright() {
@@ -129,16 +130,20 @@ const useStyles = makeStyles((theme) => ({
     overflowX: "hidden",
   },
   fixedHeight: {
-    height: 240,
+    height: "30vh",
   },
 }));
 
 export default function Dashboard() {
   const classes = useStyles();
   const currentUser = useSelector((state) => state.auth.user);
+  const [chart, setChart] = useState("Bar");
   const currentUserId = currentUser._id;
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(true);
+  const handleChartType = (e) => {
+    setChart(e);
+  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -201,7 +206,7 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <MainList handleChartType={handleChartType} />
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
@@ -212,7 +217,7 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                <Chart chart={chart} />
               </Paper>
             </Grid>
             {/* Recent Deposits */}
